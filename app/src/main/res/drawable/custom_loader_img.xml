@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <item
+            android:bottom="15dp"
+            android:left="15dp"
+            android:right="15dp"
+            android:top="15dp">
+
+                <selector>
+                        <!-- your original selector content -->
+                        <item
+                            android:drawable="@drawable/ic_loading"
+                            android:width="110dp"
+                            android:height="110dp"
+                            />
+                </selector>
+        </item>
+</layer-list >

@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bg_main">#f5f6f7</color>
+    <color name="city_name">#556799</color>
+    <color name="temp_text">#2a2a2a</color>
+    <color name="btn">#4a4a4a</color>
+    <color name="error_bg">#e85959</color>
+    <color name="line">#D3D3D3</color>
 </resources>
