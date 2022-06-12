@@ -1,10 +1,16 @@
 package com.pawanjeswani.app10xweather.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.pawanjeswani.app10xweather.model.ForecastResponse
+import com.pawanjeswani.app10xweather.model.WeatherResponse
 import com.pawanjeswani.app10xweather.network.DataRepository
+import com.pawanjeswani.app10xweather.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -12,14 +18,23 @@ class WeatherViewModel @Inject constructor(
     private val repository: DataRepository
 ) : ViewModel() {
 
-    suspend fun fetchWeather(query: String, units: String) =
-        withContext(Dispatchers.IO) {
-            repository.fetchWeather(query, units)
-        }
+    private val _weatherResponse: MutableLiveData<Resource<Response<WeatherResponse>>> =
+        MutableLiveData()
+    private val _forecastResponse: MutableLiveData<Resource<Response<ForecastResponse>>> =
+        MutableLiveData()
+    val weatherResponse: LiveData<Resource<Response<WeatherResponse>>>
+        get() = _weatherResponse
+    val forecastResponse: LiveData<Resource<Response<ForecastResponse>>>
+        get() = _forecastResponse
+
+    suspend fun fetchWeather(query: String, units: String) = viewModelScope.launch {
+        _weatherResponse.value = Resource.Loading
+        _weatherResponse.value = repository.fetchWeather(query, units)
+    }
 
 
-    suspend fun fetchForeCast(query: String, units: String, count: Int) =
-        withContext(Dispatchers.IO) {
-            repository.fetchForecast(query, units, count)
-        }
+    suspend fun fetchForeCast(query: String, units: String, count: Int) = viewModelScope.launch {
+        _forecastResponse.value = Resource.Loading
+        _forecastResponse.value = repository.fetchForecast(query, units,count)
+    }
 }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">App10xWeather</string>
+    <string name="temp_text">26 c</string>
+    <string name="day_text">Tuesday</string>
+    <string name="error_text">Something went wrong at our end</string>
+    <string name="error_btn_text">Retry</string>
+    <string name="degree_text">20°</string>
+    <string name="city_name">Bengaluru</string>
+    <string name="temperature_string">%s °</string>
 </resources>

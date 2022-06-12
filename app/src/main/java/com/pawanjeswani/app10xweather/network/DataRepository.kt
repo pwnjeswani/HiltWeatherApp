@@ -6,11 +6,11 @@ import com.pawanjeswani.app10xweather.model.WeatherResponse
 import retrofit2.Response
 import javax.inject.Inject
 
-class DataRepository @Inject constructor(private val dataService: APIService) : SafeApiRequest() {
+class DataRepository @Inject constructor(private val dataService: APIService) : SafeApiCall {
 
-    suspend fun fetchWeather(query: String, units: String): WeatherResponse {
+    suspend fun fetchWeather(query: String, units: String): Resource<Response<WeatherResponse>> {
         val apiKey = BuildConfig.API_KEY
-        return apiRequestCall {
+        return safeApi {
             dataService.fetchWeather(
                 app_id = apiKey,
                 query = query,
@@ -23,9 +23,9 @@ class DataRepository @Inject constructor(private val dataService: APIService) : 
         query: String,
         units: String,
         count: Int
-    ): ForecastResponse {
+    ): Resource<Response<ForecastResponse>> {
         val apiKey = BuildConfig.API_KEY
-        return apiRequestCall {
+        return safeApi {
             dataService.fetchForecast(
                 app_id = apiKey,
                 query = query,

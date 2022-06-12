@@ -4,16 +4,15 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.pawanjeswani.app10xweather.R
 import com.pawanjeswani.app10xweather.databinding.ActivityMainBinding
-import com.pawanjeswani.app10xweather.util.ApiException
-import com.pawanjeswani.app10xweather.util.NoInternetException
-import com.pawanjeswani.app10xweather.util.snackbar
-import com.pawanjeswani.app10xweather.util.toast
+import com.pawanjeswani.app10xweather.network.Resource
+import com.pawanjeswani.app10xweather.util.hide
+import com.pawanjeswani.app10xweather.util.isConnected
+import com.pawanjeswani.app10xweather.util.show
 import com.pawanjeswani.app10xweather.viewmodel.WeatherViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -25,28 +24,71 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.btn.setOnClickListener {
-            lifecycleScope.launch {
-                try {
-                    val authResponse =
-                        weatherViewModel.fetchForeCast(query = "Bengaluru", units = "metric", count = 4)
-                    if (authResponse.cod == "200") {
-                        withContext(Dispatchers.Main) {
-                            toast(authResponse.list[0].dtTxt)
-                        }
+        binding.tvCityName.text = getString(R.string.city_name)
+        binding.btnRetry.setOnClickListener {
+            fetchWeatherAndForecast()
+        }
+        startObserving()
+        fetchWeatherAndForecast()
+    }
 
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            binding.rootLayout.snackbar(authResponse.cod.toString())
-                        }
+    private fun fetchWeatherAndForecast() {
+        lifecycleScope.launch {
+            weatherViewModel.fetchWeather(query = "Bengaluru", units = "metric")
+        }
+        lifecycleScope.launch {
+            weatherViewModel.fetchForeCast(query = "Bengaluru", units = "metric", count = 4)
+        }
+    }
+
+    private fun startObserving() {
+        weatherViewModel.weatherResponse.observe(this) {
+            when (it) {
+                is Resource.Loading -> {
+                    if(isConnected())
+                        handleLoader()
+                }
+                is Resource.Failure -> {
+                    handleErrorUi()
+                }
+                is Resource.Success -> {
+                    val weatherResponse = it.value.body()
+                    showMainUi()
+                    weatherResponse?.let { response ->
+                        binding.tvTodayTemp.text =
+                            getString(R.string.temperature_string, response.main.temp)
                     }
-                } catch (e: ApiException) {
-                    e.printStackTrace()
-                } catch (e: NoInternetException) {
-                    e.printStackTrace()
                 }
             }
         }
+        weatherViewModel.forecastResponse.observe(this) {
 
+        }
     }
+
+    private fun handleLoader() {
+        binding.apply {
+            clError.hide()
+            progressBar.show()
+            clMain.hide()
+        }
+    }
+
+    private fun showMainUi() {
+        binding.apply {
+            clError.hide()
+            progressBar.hide()
+            clMain.show()
+        }
+    }
+
+    private fun handleErrorUi() {
+        binding.apply {
+            clMain.hide()
+            progressBar.hide()
+            clError.show()
+        }
+    }
+
+
 }

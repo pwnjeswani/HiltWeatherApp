@@ -2,17 +2,17 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
         <item
-            android:bottom="15dp"
-            android:left="15dp"
-            android:right="15dp"
-            android:top="15dp">
+            android:bottom="1dp"
+            android:left="1dp"
+            android:right="1dp"
+            android:top="1dp">
 
                 <selector>
                         <!-- your original selector content -->
                         <item
                             android:drawable="@drawable/ic_loading"
-                            android:width="110dp"
-                            android:height="110dp"
+                            android:width="96dp"
+                            android:height="96dp"
                             />
                 </selector>
         </item>

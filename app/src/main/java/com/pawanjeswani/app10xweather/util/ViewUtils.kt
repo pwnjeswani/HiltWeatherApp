@@ -11,11 +11,11 @@ fun Context.toast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_LONG ).show()
 }
 
-fun ProgressBar.show(){
+fun View.show(){
     visibility = View.VISIBLE
 }
 
-fun ProgressBar.hide(){
+fun View.hide(){
     visibility = View.GONE
 }
 

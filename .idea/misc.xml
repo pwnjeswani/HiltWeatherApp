@@ -7,7 +7,9 @@
         <entry key="app/src/main/res/drawable-v24/custom_rotate_drawable.xml" value="0.106" />
         <entry key="app/src/main/res/drawable/custom_loader_img.xml" value="0.106" />
         <entry key="app/src/main/res/drawable/custom_rotate_drawable.xml" value="0.106" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15555555555555556" />
+        <entry key="app/src/main/res/layout-v21/activity_main.xml" value="0.16742654508611957" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/forecast_item.xml" value="0.33" />
       </map>
     </option>
   </component>
