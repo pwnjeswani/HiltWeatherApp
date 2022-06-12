@@ -1,4 +1,4 @@
-package `in`.pawanjeswani.app10xweather.model
+package com.pawanjeswani.app10xweather.model
 
 
 import com.google.gson.annotations.SerializedName

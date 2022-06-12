@@ -1,4 +1,4 @@
-package `in`.pawanjeswani.app10xweather.util
+package com.pawanjeswani.app10xweather.util
 
 import java.io.IOException
 

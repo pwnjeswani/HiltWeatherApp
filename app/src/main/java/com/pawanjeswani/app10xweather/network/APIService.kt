@@ -1,8 +1,8 @@
-package `in`.pawanjeswani.app10xweather.network
+package com.pawanjeswani.app10xweather.network
 
 
-import `in`.pawanjeswani.app10xweather.model.ForecastResponse
-import `in`.pawanjeswani.app10xweather.model.WeatherResponse
+import com.pawanjeswani.app10xweather.model.ForecastResponse
+import com.pawanjeswani.app10xweather.model.WeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,6 +1,6 @@
-package `in`.pawanjeswani.app10xweather.network
+package com.pawanjeswani.app10xweather.network
 
-import `in`.pawanjeswani.app10xweather.util.ApiException
+import com.pawanjeswani.app10xweather.util.ApiException
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
@@ -18,6 +18,7 @@ abstract class SafeApiRequest {
                 try {
                     message.append(JSONObject(it).getString("message"))
                 } catch (e: JSONException) {
+                    message.append("UnknownError")
                 }
                 message.append("\n")
             }

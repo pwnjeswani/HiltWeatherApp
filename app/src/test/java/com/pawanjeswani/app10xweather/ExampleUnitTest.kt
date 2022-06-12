@@ -1,4 +1,4 @@
-package `in`.pawanjeswani.app10xweather
+package com.pawanjeswani.app10xweather
 
 import org.junit.Test
 
