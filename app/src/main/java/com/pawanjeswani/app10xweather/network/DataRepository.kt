@@ -20,7 +20,9 @@ class DataRepository @Inject constructor(private val dataService: APIService) : 
     }
 
     suspend fun fetchForecast(
-        query: String,
+        lat: Double,
+        lon: Double,
+        exclude:List<String>,
         units: String,
         count: Int
     ): Resource<Response<ForecastResponse>> {
@@ -28,7 +30,9 @@ class DataRepository @Inject constructor(private val dataService: APIService) : 
         return safeApi {
             dataService.fetchForecast(
                 app_id = apiKey,
-                query = query,
+                lat=lat,
+                lon=lon,
+                exclude=exclude,
                 units = units,
                 count = count
             )

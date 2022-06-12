@@ -33,8 +33,14 @@ class WeatherViewModel @Inject constructor(
     }
 
 
-    suspend fun fetchForeCast(query: String, units: String, count: Int) = viewModelScope.launch {
+    suspend fun fetchForeCast(
+        lat: Double,
+        lon: Double,
+        exclude: List<String>,
+        units: String,
+        count: Int
+    ) = viewModelScope.launch {
         _forecastResponse.value = Resource.Loading
-        _forecastResponse.value = repository.fetchForecast(query, units,count)
+        _forecastResponse.value = repository.fetchForecast(lat, lon, exclude, units, count)
     }
 }

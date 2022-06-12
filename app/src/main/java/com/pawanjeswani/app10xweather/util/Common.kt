@@ -4,6 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.view.View
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun Context.isConnected(): Boolean {
 
@@ -34,4 +37,10 @@ fun Context.isConnected(): Boolean {
         }
     }
     return hasInternet
+}
+
+fun View.getDayOfWeek(timeInMillis: Long, cal:Calendar): String {
+    val date: Date = cal.time
+    date.time = timeInMillis
+    return SimpleDateFormat("EEEE", Locale.ENGLISH).format(date.time)
 }

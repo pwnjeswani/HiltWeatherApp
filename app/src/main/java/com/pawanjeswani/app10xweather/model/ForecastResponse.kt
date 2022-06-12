@@ -12,20 +12,24 @@ data class ForecastResponse(
     val city: City,
     @SerializedName("cnt")
     val cnt: Int,
-    @SerializedName("list")
-    val list: List<WeatherData>
+    @SerializedName("daily")
+    val dailyList: ArrayList<WeatherData>
 )
 
 
 data class WeatherData(
     @SerializedName("dt")
     val dt: Long,
-    @SerializedName("dt_txt")
-    val dtTxt: String,
+    @SerializedName("temp")
+    val temp: Temp,
     @SerializedName("main")
     val main: Main
 )
 
+data class Temp(
+    @SerializedName("day")
+    val day: Double
+)
 data class City(
     @SerializedName("name")
     val name: String

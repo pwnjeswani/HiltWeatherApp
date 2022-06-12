@@ -6,5 +6,6 @@
     <string name="error_btn_text">Retry</string>
     <string name="degree_text">20°</string>
     <string name="city_name">Bengaluru</string>
-    <string name="temperature_string">%s °</string>
+    <string name="temperature_string">%d °</string>
+    <string name="celsius_string">%d c</string>
 </resources>
